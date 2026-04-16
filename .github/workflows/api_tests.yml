@@ -1,0 +1,37 @@
+name: Cypress API Tests
+
+on: [push, pull_request]
+
+jobs:
+  api-tests:
+    name: ${{ matrix.env }} Environment
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        env: [dev, prod]
+
+    services:
+      api-service:
+        image: ghcr.io/danielsilva-loanpro/sdet-interview-challenge:latest
+        ports:
+          - 3000:3000
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          env: environment=${{ matrix.env }}
+          # We don't need 'start' because the service container is already running
+          
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-results-${{ matrix.env }}
+          path: |
+            cypress/screenshots
+            cypress/videos
