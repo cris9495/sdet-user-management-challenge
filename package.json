@@ -1,0 +1,20 @@
+{
+  "name": "sdet-challenge-cypress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:dev": "cypress run --env environment=dev",
+    "test:prod": "cypress run --env environment=prod"
+  },
+  
+
+ 
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "cypress": "^15.13.1"
+  }
+}
