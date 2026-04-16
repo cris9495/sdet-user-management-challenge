@@ -21,17 +21,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install Dependencies
+        run: npm install
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           env: environment=${{ matrix.env }}
-          # We don't need 'start' because the service container is already running
           
-      - name: Upload Artifacts
+      - name: Generate Final HTML Report
+        if: always()
+        run: npm run generate:report
+
+      - name: Upload Testing Report Artifacts
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: cypress-results-${{ matrix.env }}
+          name: testing-report-${{ matrix.env }}
           path: |
+            cypress/final-report
             cypress/screenshots
             cypress/videos

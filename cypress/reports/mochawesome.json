@@ -1,0 +1,228 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 7,
+    "passes": 5,
+    "pending": 0,
+    "failures": 2,
+    "start": "2026-04-16T04:13:44.771Z",
+    "end": "2026-04-16T04:13:46.300Z",
+    "duration": 1529,
+    "testsRegistered": 7,
+    "passPercent": 71.42857142857143,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "a7957baa-caa7-4d69-8f27-8f7d6b60b8e0",
+      "title": "",
+      "fullFile": "cypress\\e2e\\user_management.cy.js",
+      "file": "cypress\\e2e\\user_management.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "7693e3b7-5739-49d5-922c-1ccf629b9033",
+          "title": "User Management API E2E Tests - Deterministic",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should create the static user (POST /users)",
+              "fullTitle": "User Management API E2E Tests - Deterministic should create the static user (POST /users)",
+              "timedOut": null,
+              "duration": 105,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request('POST', `${apiUrl}/users`, testUser).then(response => {\n  expect(response.status).to.eq(201);\n  expect(response.body.email).to.eq(testUser.email);\n  expect(response.body.name).to.eq(\"Jane Doe\");\n});",
+              "err": {},
+              "uuid": "9f1bc604-e561-43ac-956d-2c4e3aab9178",
+              "parentUUID": "7693e3b7-5739-49d5-922c-1ccf629b9033",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should return 409 when creating the same user twice",
+              "fullTitle": "User Management API E2E Tests - Deterministic should return 409 when creating the same user twice",
+              "timedOut": null,
+              "duration": 450,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Create first time\ncy.request('POST', `${apiUrl}/users`, testUser);\n// Attempt second time\ncy.request({\n  method: 'POST',\n  url: `${apiUrl}/users`,\n  body: testUser,\n  failOnStatusCode: false\n}).then(response => {\n  expect(response.status).to.eq(409);\n});",
+              "err": {
+                "message": "AssertionError: expected 500 to equal 409",
+                "estack": "AssertionError: expected 500 to equal 409\n    at Context.eval (webpack://sdet-challenge-cypress/./cypress/e2e/user_management.cy.js:59:33)\n    at getRet (http://localhost:3000/__cypress/runner/cypress_runner.js:122798:20)\n    at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise.attempt.Promise.try (http://localhost:3000/__cypress/runner/cypress_runner.js:4285:29)\n    at Context.thenFn (http://localhost:3000/__cypress/runner/cypress_runner.js:122809:66)\n    at Context.then (http://localhost:3000/__cypress/runner/cypress_runner.js:123060:21)",
+                "diff": "- 500\n+ 409\n"
+              },
+              "uuid": "8b4b6d3a-6e89-4949-a961-ce59476577f2",
+              "parentUUID": "7693e3b7-5739-49d5-922c-1ccf629b9033",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should fetch the static user (GET /users/{email})",
+              "fullTitle": "User Management API E2E Tests - Deterministic should fetch the static user (GET /users/{email})",
+              "timedOut": null,
+              "duration": 102,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request('POST', `${apiUrl}/users`, testUser);\ncy.request('GET', `${apiUrl}/users/${testUser.email}`).then(response => {\n  expect(response.status).to.eq(200);\n  expect(response.body.name).to.eq(testUser.name);\n});",
+              "err": {},
+              "uuid": "94700c8f-883e-42ce-82ac-0c07bb7e0ff0",
+              "parentUUID": "7693e3b7-5739-49d5-922c-1ccf629b9033",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should update the static user (PUT /users/{email})",
+              "fullTitle": "User Management API E2E Tests - Deterministic should update the static user (PUT /users/{email})",
+              "timedOut": null,
+              "duration": 87,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request('POST', `${apiUrl}/users`, testUser);\ncy.request('PUT', `${apiUrl}/users/${testUser.email}`, updatedUser).then(response => {\n  expect(response.status).to.eq(200);\n  expect(response.body.name).to.eq(\"Jane Updated\");\n  expect(response.body.age).to.eq(35);\n});",
+              "err": {},
+              "uuid": "b3f91bda-83e2-435a-bbf1-9094aa124b70",
+              "parentUUID": "7693e3b7-5739-49d5-922c-1ccf629b9033",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should delete the static user successfully",
+              "fullTitle": "User Management API E2E Tests - Deterministic should delete the static user successfully",
+              "timedOut": null,
+              "duration": 94,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request('POST', `${apiUrl}/users`, testUser);\ncy.request({\n  method: 'DELETE',\n  url: `${apiUrl}/users/${testUser.email}`,\n  headers: {\n    'Authentication': authToken\n  }\n}).then(response => {\n  expect(response.status).to.eq(204);\n});",
+              "err": {},
+              "uuid": "3aa66813-2907-4c54-867f-bc0cb19d4486",
+              "parentUUID": "7693e3b7-5739-49d5-922c-1ccf629b9033",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "BUG SEARCH: Age Maximum Boundary (POST /users with age 151)",
+              "fullTitle": "User Management API E2E Tests - Deterministic BUG SEARCH: Age Maximum Boundary (POST /users with age 151)",
+              "timedOut": null,
+              "duration": 111,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const email = \"too_old@example.com\";\ncleanup(email);\ncy.request({\n  method: 'POST',\n  url: `${apiUrl}/users`,\n  body: {\n    name: \"Old Person\",\n    email: email,\n    age: 151\n  },\n  // Spec says max 150\n  failOnStatusCode: false\n}).then(response => {\n  expect(response.status).to.eq(400, \"Should return 400 for age above maximum 150\");\n});",
+              "err": {},
+              "uuid": "27039dfe-c5f8-4dd0-80bf-4466d479c883",
+              "parentUUID": "7693e3b7-5739-49d5-922c-1ccf629b9033",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "BUG SEARCH: Path and Body Email Mismatch (PUT /users/{email})",
+              "fullTitle": "User Management API E2E Tests - Deterministic BUG SEARCH: Path and Body Email Mismatch (PUT /users/{email})",
+              "timedOut": null,
+              "duration": 338,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const urlEmail = \"user_a@example.com\";\nconst bodyEmail = \"user_b@example.com\";\ncleanup(urlEmail);\ncleanup(bodyEmail);\n// Create User A\ncy.request('POST', `${apiUrl}/users`, {\n  name: \"User A\",\n  email: urlEmail,\n  age: 20\n});\n// Attempt to update User A using User A's URL, but putting User B's email in the JSON body\ncy.request({\n  method: 'PUT',\n  url: `${apiUrl}/users/${urlEmail}`,\n  body: {\n    name: \"Malicious Update\",\n    email: bodyEmail,\n    // Mismatch!\n    age: 25\n  },\n  failOnStatusCode: false\n}).then(response => {\n  /* \n     Logic: Usually, an API should either:\n     1. Return 400 because the URL and Body don't match.\n     2. Ignore the email in the body and only update User A.\n     \n     If it creates User B or overwrites User A's email without checking \n     for duplicates, it is a bug.\n  */\n  expect(response.status).to.be.oneOf([400, 409], \"API should reject mismatched body/path emails\");\n});",
+              "err": {
+                "message": "AssertionError: API should reject mismatched body/path emails: expected 200 to be one of [ 400, 409 ]",
+                "estack": "AssertionError: API should reject mismatched body/path emails: expected 200 to be one of [ 400, 409 ]\n    at Context.eval (webpack://sdet-challenge-cypress/./cypress/e2e/user_management.cy.js:135:36)\n    at getRet (http://localhost:3000/__cypress/runner/cypress_runner.js:122798:20)\n    at tryCatcher (http://localhost:3000/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise.attempt.Promise.try (http://localhost:3000/__cypress/runner/cypress_runner.js:4285:29)\n    at Context.thenFn (http://localhost:3000/__cypress/runner/cypress_runner.js:122809:66)\n    at Context.then (http://localhost:3000/__cypress/runner/cypress_runner.js:123060:21)",
+                "diff": "- 200\n+ [ 400, 409 ]\n"
+              },
+              "uuid": "451317c1-9ba2-4e3b-b409-c3b3ed8dc833",
+              "parentUUID": "7693e3b7-5739-49d5-922c-1ccf629b9033",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "9f1bc604-e561-43ac-956d-2c4e3aab9178",
+            "94700c8f-883e-42ce-82ac-0c07bb7e0ff0",
+            "b3f91bda-83e2-435a-bbf1-9094aa124b70",
+            "3aa66813-2907-4c54-867f-bc0cb19d4486",
+            "27039dfe-c5f8-4dd0-80bf-4466d479c883"
+          ],
+          "failures": [
+            "8b4b6d3a-6e89-4949-a961-ce59476577f2",
+            "451317c1-9ba2-4e3b-b409-c3b3ed8dc833"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 1287,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.3.2"
+    }
+  }
+}

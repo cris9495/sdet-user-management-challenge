@@ -5,16 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test:dev": "cypress run --env environment=dev",
-    "test:prod": "cypress run --env environment=prod"
+    "test:prod": "cypress run --env environment=prod",
+    "generate:report": "mochawesome-merge cypress/reports/*.json > full_report.json && marg full_report.json --reportDir cypress/final-report"
   },
-  
-
- 
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "cypress": "^15.13.1"
+    "cypress": "^15.13.1",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.1.1",
+    "mochawesome-report-generator": "^6.3.2"
   }
 }
