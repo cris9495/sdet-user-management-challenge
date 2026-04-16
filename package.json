@@ -6,7 +6,7 @@
   "scripts": {
     "test:dev": "cypress run --env environment=dev",
     "test:prod": "cypress run --env environment=prod",
-    "generate:report": "mochawesome-merge cypress/reports/*.json > full_report.json && marg full_report.json --reportDir cypress/final-report"
+    "generate:report": "mochawesome-merge cypress/reports/*.json > full_report.json && npx marge full_report.json --reportDir cypress/final-report"
   },
   "keywords": [],
   "author": "",
