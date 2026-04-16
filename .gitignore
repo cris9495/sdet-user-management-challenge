@@ -1,0 +1,7 @@
+node_modules/
+cypress/reports/
+cypress/final-report/
+cypress/screenshots/
+cypress/videos/
+full_report.json
+full_report.html
